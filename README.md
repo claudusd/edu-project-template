@@ -1,5 +1,5 @@
 # Project
-
+GAUME Mathieu et PELMOINE Remi
 ## Part 1 - api
 
 [API](doc/swagger)
@@ -7,7 +7,8 @@
 ## Part 2 - react
 
 ## npm run ...
-
+* npm install 
+* npm --save-dev react-router
 * npm run build
 * npm run watch
 * npm run start
