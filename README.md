@@ -1,5 +1,7 @@
 # Project
 
+PIC PIERRE
+
 ## Part 1 - api
 
 [API](doc/swagger)
