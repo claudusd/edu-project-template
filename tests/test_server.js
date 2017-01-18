@@ -2,6 +2,7 @@ const child_process = require('child_process');
 const path = require('path');
 const sys = require("util");
 const fs = require('fs');
+const fsextra = require('fs-extra');
 
 const port = 4598;
 
@@ -35,7 +36,7 @@ setTimeout(function() {
 
     test.on('close', function(code) {
         server.kill();
-	fs.rmdir(pathData);
+	fsextra.remove(pathData);
     });
 
 }, 500);
