@@ -26,25 +26,14 @@ api.route('/')
 			files.push(strPath);
 		}).on('complete', function() {
 			if(files.length == 0) return res.status(204).send('No notes found');
-
-			/*for (var i = 0; i < files.length; i++) {
-				fs.readFile(files[i], (err, data) => {
-					if (err) throw err;
-					allContent.push(JSON.parse(data));
-					console.log(allContent);
-					console.log(f);
-				});
-				if(files.length -)
-			}*/
+			
 			files.forEach(function(f) {
 				fs.readFileSync(f, (err, data) => {
 					if (err) throw err;
 					allContent.push(JSON.parse(data));
-					console.log(allContent);
-					//console.log(f);
+					//console.log(allContent);
 				});
 			});
-			//console.log('finish');
 	    	return res.status(200).send(allContent);
 		});
 
