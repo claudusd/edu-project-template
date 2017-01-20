@@ -29,7 +29,6 @@ routeur.get("/",function(request, response){
 routeur.get("/:id",function(request, response){
 	var id= request.params.id;
 	fs.exists(config.data+"/"+id+".json", function(exist) {
-		console.log(exist);
 		if(exist){ 
 			fs.readFile(config.data+"/"+id+".json", 'utf8', function(err, data) {
 				if (err) {
@@ -49,7 +48,7 @@ routeur.post("/", function(request,response){
 	var note = request.body;
 	console.log(note);
 	var id=uuid.v4();
-	var date= Date.now()/1000;
+	var date= Math.round(Date.now()/1000);
 	note.id=id;
 	note.date=date;
 
@@ -58,6 +57,22 @@ routeur.post("/", function(request,response){
 			return response.sendStatus(500);
 		return response.status(201).json({id: note.id});
 	})
+})
+
+//delete a note
+routeur.delete("/:id", function(request,response){
+	var id= request.params.id;
+	fs.exists(config.data+"/"+id+".json", function(exist) {
+		if(exist){ 
+			fs.unlink(config.data+"/"+id+".json", function(err) {
+				if(err) return response.sendStatus(500);
+				return response.sendStatus(204);
+			})
+		} else {
+			return response.sendStatus(404);
+		}
+	});	
+	
 })
 
 module.exports= routeur;
