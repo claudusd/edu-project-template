@@ -9,17 +9,25 @@ const fs= require('fs');
 routeur.get("/",function(request, response){
 	//list files in /data
 	var finder = new FindFiles({
-    		rootFolder : config.data
+    		rootFolder : config.data,
+		filterFunction : function (path, stat) {
+        	return (path.includes(".json")) ? true : false;
+    }
 	});
 	
 	var files=[];
 	//if there are files
 	finder.on("match", function (strPath, stat){
-		files.push(strPath);
+		var fileContent=fs.readFileSync(strPath, 'utf8');
+		files.push(JSON.parse(fileContent));
+		
 	}).on("complete",function(){
 		if(files.length == 0){
 			console.log('Aucun fichier trouvé');
 			return response.sendStatus(204);	
+		}
+		else{
+			return response.status(200).send(files);
 		}
 	}).startSearch();
 
@@ -48,7 +56,7 @@ routeur.post("/", function(request,response){
 	var note = request.body;
 	console.log(note);
 	var id=uuid.v4();
-	var date= Math.round(Date.now()/1000);
+	var date= Math.floor(Date.now()/1000);
 	note.id=id;
 	note.date=date;
 
