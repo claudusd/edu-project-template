@@ -9,26 +9,27 @@ const uuid = require('node-uuid');
 
 api.get('/', function (req, res) {
 	var finder = new FindFinder({
-    rootFolder : config.data
+    rootFolder : config.data,
+    filterFunction : function (path, stat) {
+        return true;
+    }
 	});
-	var allContent = [];
 	var files = [];
+	var notes = [];
 	finder.on('match', function(strPath, stat) {
-		console.log(strPath + " - " + stat.mtime);
+		console.log(strPath);
 		files.push(strPath);
 	}).on('complete', function(){
 		if(files.length == 0){
 			console.log("Empty");
 			return res.sendStatus(204);
 		}
-		
-		files.forEach(function(f) {
-			fs.readFileSync(f, (err, data) => {
-				allContent.push(JSON.parse(data));
-				console.log(allContent);
-			});
-		});
-		return res.status(200).send(allcontent);
+		for(file of files){
+			notes.push(JSON.parse(fs.readFileSync(file)));
+		}
+		console.log(notes);
+
+		return res.status(200).send(notes);
 		 	
 	}).startSearch();
 });

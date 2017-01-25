@@ -21,6 +21,29 @@ class Swag extends Component {
     }
 };
 
+class New extends Component {
+    render(){
+        return(
+       
+         <div>
+           <h1>Ajouter une note</h1>
+           <form>
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Contenu</label>
+                    <input type="text" class="form-control"/>
+                </div>
+                 <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </div>
+        );
+    }
+};
+
+
 export default class App extends Component {
     render() {
         return (
@@ -28,7 +51,7 @@ export default class App extends Component {
                 <Router history={history}>
                     <Route path="/" component={Yolo}>
                     </Route>
-                    <Route path="/new" component={Swag}>
+                    <Route path="/new" component={New}>
                     </Route>
                 </Router>
             </Provider>
