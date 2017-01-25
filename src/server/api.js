@@ -16,6 +16,7 @@ api.get('/', function(request, response){
 	});
 
 	var files = [];
+	var jsonFile
 
 	finder.on("match", function(path, stat) {
    		files.push(path);
@@ -28,17 +29,18 @@ api.get('/', function(request, response){
 		}else {			
 			for(var file of files){
 				console.log(file);
-
-				fs.readFile(file,  (err, data) => {
-					if (err) throw err;
-						console.log(JSON.parse(data));						
-				});
+				
+				jsonFile = fs.readFileSync(file)
+				
+				console.log(JSON.parse(jsonFile));						
 			}	
-		}
-    		console.log("les fichiers ont bien étés ajoutés");
+			console.log("les fichiers ont bien étés ajoutés"); 
+			return response.status(200).json({id: jsonFile.id});
+		}  				
 	});
 
 	finder.startSearch();
+	
 });
 
 api.get('/:id', function(request,response){
@@ -49,9 +51,12 @@ api.get('/:id', function(request,response){
 	
 	fs.exists(path, (exists) =>{
 		if (exists){
-			return response.sendStatus(200);
+			
+			var note = JSON.parse(fs.readFileSync(path));			
+			return response.json(note);
+			
 		} else{
-			return response.sendStatus(204);
+			return response.sendStatus(404);
 		}
 	});	
 });
@@ -63,26 +68,26 @@ api.delete('/:id', function(request,response){
 	fs.exists(path, (exists) =>{
 		if (exists){
 			fs.unlink(path);
-			return response.sendStatus(200);
-		} else{
 			return response.sendStatus(204);
+		} else{
+			return response.sendStatus(404);
 		}
 	});	
 });
 
 
 api.post("/", function(request, response){
-	var json = {};
-	json["id"] = uuid.v4();
-	json["title"] = request.body.title
-	json["content"] = request.body.content;
-	json["date"] = '"' + Date.now() / 1000 + '"';
-	path = config.data + "/" + json["id"] + ".json";
+	var json = request.body;
+	json.id = uuid.v4();
+	json.date = Math.floor(Date.now() / 1000);
+	path = config.data + "/" + json.id + ".json";
 	
 	fs.writeFile(path,JSON.stringify(json),(err) => {
 		if (err) throw err;
-			console.log('It\'s saved!');
+		return response.status(201).json({id: json.id});
+		console.log('It\'s saved!');
 	});
+	
 });
 
 module.exports = api;
