@@ -49,7 +49,7 @@ api.get('/:id', function(req,res){
 api.post('/', function (req, res) {
 	var note = req.body
 	note.id = uuid.v4();
-	note.date = Math.round(Date.now() / 1000);
+	note.date = Math.floor(Date.now() / 1000);
 	fs.writeFile(config.data+'/'+note.id+'.json', JSON.stringify(note),function (err){
 		if(err) throw err;
 	});
