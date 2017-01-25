@@ -10,23 +10,49 @@ const fs = require('fs');
 
 
 router.get('/', function (req, res) {
-				//pour recupérer les notes qu'il y a dans le dossier data
+	//pour recupérer les notes qu'il y a dans le dossier data
   	var finder = new FindFinder({
-		rootFolder: config.data
+		rootFolder: config.data,
+		filterFunction : function (path, stat) {
+			return path.endsWith('.json');
+		    }
 	});
 	var files = [];
 	finder.on('match', function(strPath, stat) {
 		files.push(strPath);
 	}).on('complete', function() {
+console.log(files);
 		if(files.length==0) {
-			return res.sendStatus(204);
-			//return res.send('at least i m trying');		
+			return res.sendStatus(204);		
 		}
 		else {
-		
+			var list = [];
+			var i = 0;
+			for(i; i < files.length ; i++)
+			{
+				var obj = JSON.parse(fs.readFileSync(files[i], 'utf8'));
+				list.push(obj);
+			}
+			return res.json(list);
 		}
 	}).startSearch();
 })
+
+router.get('/:idNote', function (req, res) {
+	//Récupération du parametre
+	var idnote = req.params.idNote;
+	var chemin = config.data + "/" + idnote + ".json";
+	//Récupérer une note
+	fs.exists(chemin, (exists) => {
+		if(exists)
+		{
+			return res.json(JSON.parse(fs.readFileSync(chemin, 'utf8')));
+		} else {
+			return res.sendStatus(404);
+		}
+	});
+})
+
 // curl --data "title=title" localhost:3000/notes
 
 router.post('/', function (req, res) {
@@ -35,22 +61,30 @@ router.post('/', function (req, res) {
 	note.title = req.body.title;
 	note.content = req.body.content;
 	note.id = uuid.v4();
-	note.date = Date.now()/1000;
+	note.date = Math.floor(Date.now() / 1000);
 console.log(note);
-	fs.writeFile(config.data+'/'+note.id+'.json', JSON.stringify(note), function() {
-		res.sendStatus(500);
+	fs.writeFile(config.data+'/'+note.id+'.json', JSON.stringify(note), function(err) {
+		if (err)
+		 	return res.sendStatus(500);
+		return res.status(201).json({id : note.id});
 	});
-	res.status(201).send(JSON.stringify({id : note.id}));
-	//retoure objet avec id {"id": }
-  	//res.send('Got a POST request');
 })
 
-router.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user')
-})
+router.delete('/:idNote', function (req, res) {
+	var idnote = req.params.idNote;
+	var chemin = config.data + "/" + idnote + ".json";
+	//Récupérer une note
+	fs.exists(chemin, (exists) => {
+	if(exists)
+	{
+		fs.unlinkSync(chemin);
+		return res.sendStatus(204);
+	} else {
+		return res.sendStatus(404);
+	}
+});
 
-router.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user')
+	
 })
 
 router.use('/time', function timeLog (req, res, next) {
