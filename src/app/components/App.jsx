@@ -5,6 +5,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import configure from './store';
 
+import MarkList from './MarkList'
+
 const store = configure();
 
 const history = syncHistoryWithStore(browserHistory, store);
@@ -21,31 +23,12 @@ class Swag extends Component {
     }
 };
 
-class Marks extends Component {
-    getMarks() {
-        return fetch('http://localhost:3000/notes', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            /*body: JSON.stringify({
-                firstParam: 'yourValue',
-                secondParam: 'yourOtherValue',
-            })*/
-        })
-    }
-    render() {
-
-    }
-}
-
 export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    <Route path="/" component={Yolo}>
+                    <Route path="/" component={MarkList}>
                     </Route>
                     <Route path="/new" component={Swag}>
                     </Route>

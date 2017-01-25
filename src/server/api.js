@@ -22,7 +22,7 @@ api.route('/')
 		});
 
 		finder.on('match', function(strPath, stat) {
-		    console.log(strPath + " - " + stat.mtime);
+		    //console.log(strPath + " - " + stat.mtime);
 			files.push(strPath);
 		}).on('complete', function() {
 			console.log(files.length);
@@ -31,7 +31,7 @@ api.route('/')
 			for(file of files) {
 				allContent.push(JSON.parse(fs.readFileSync(file)))
 			};
-			
+
 	    	return res.status(200).send(allContent);
 		});
 
