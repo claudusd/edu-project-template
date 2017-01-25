@@ -3,8 +3,13 @@ const api = require('./api.js');
 const config = require('./config.js');
 const bodyParser = require('body-parser');
 
-var app = express();
 
+
+
+var app = express();
+var router = express.Router();
+
+app.use(express.static(config.static));
 app.use(bodyParser.json());
 app.use('/notes', api);
 

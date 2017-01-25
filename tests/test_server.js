@@ -36,7 +36,7 @@ setTimeout(function() {
 
     test.on('close', function(code) {
         server.kill();
-		fsExtra.remove(pathData);
+		//fsExtra.remove(pathData);
     });
 
 }, 500);

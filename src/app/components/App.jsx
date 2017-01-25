@@ -15,9 +15,21 @@ class Yolo extends Component {
     }
 };
 
-class Swag extends Component {
+class FormNote extends Component {
     render() {
-        return(<h1>Swag</h1>);
+        return(	
+		<div>
+			<h1>Création d'une note </h1>
+
+			<form method="post">
+				<label>Nom : </label>
+				<input type="text"/>
+
+				<label> Contenu : </label>
+				<input type="text"/>
+			</form>
+		</div>
+	);
     }
 };
 
@@ -28,7 +40,7 @@ export default class App extends Component {
                 <Router history={history}>
                     <Route path="/" component={Yolo}>
                     </Route>
-                    <Route path="/new" component={Swag}>
+                    <Route path="/addNote" component={FormNote}>
                     </Route>
                 </Router>
             </Provider>
