@@ -21,6 +21,25 @@ class Swag extends Component {
     }
 };
 
+class Marks extends Component {
+    getMarks() {
+        return fetch('http://localhost:3000/notes', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            /*body: JSON.stringify({
+                firstParam: 'yourValue',
+                secondParam: 'yourOtherValue',
+            })*/
+        })
+    }
+    render() {
+
+    }
+}
+
 export default class App extends Component {
     render() {
         return (

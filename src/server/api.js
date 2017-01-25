@@ -25,15 +25,13 @@ api.route('/')
 		    console.log(strPath + " - " + stat.mtime);
 			files.push(strPath);
 		}).on('complete', function() {
+			console.log(files.length);
 			if(files.length == 0) return res.status(204).send('No notes found');
 			
-			files.forEach(function(f) {
-				fs.readFileSync(f, (err, data) => {
-					if (err) throw err;
-					allContent.push(JSON.parse(data));
-					//console.log(allContent);
-				});
-			});
+			for(file of files) {
+				allContent.push(JSON.parse(fs.readFileSync(file)))
+			};
+			
 	    	return res.status(200).send(allContent);
 		});
 
