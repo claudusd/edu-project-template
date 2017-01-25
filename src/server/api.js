@@ -11,9 +11,10 @@ api.get('/', function (req, res) {
 	var finder = new FindFinder({
     rootFolder : config.data
 	});
-	
+	var allContent = [];
 	var files = [];
 	finder.on('match', function(strPath, stat) {
+		console.log(strPath + " - " + stat.mtime);
 		files.push(strPath);
 	}).on('complete', function(){
 		if(files.length == 0){
@@ -21,35 +22,39 @@ api.get('/', function (req, res) {
 			return res.sendStatus(204);
 		}
 		
+		files.forEach(function(f) {
+			fs.readFileSync(f, (err, data) => {
+				allContent.push(JSON.parse(data));
+				console.log(allContent);
+			});
+		});
+		return res.status(200).send(allcontent);
+		 	
 	}).startSearch();
 });
 
+
 api.get('/:id', function(req,res){
-	var finder = new FindFinder({
-    rootFolder : config.data
-	});
-	var filename = config.data+"/"+req.params.id+".json";
-	var files = [];
-	finder.on('match', function(strPath, stat) {
-		files.push(strPath);
-	}).on('complete', function(){
-		if(files.name == filename){
-			console.log("OK");
-			return res.sendStatus(204);
+	var file = config.data + "/" + req.params.id + ".json";
+	fs.exists(file, (exists) => {
+		if (exists) {
+			return res.status(200).sendFile(file);
+		} else {
+			return res.status(404).send('Note not found');
 		}
-		
-	}).startSearch();
+	});
 });
 
 api.post('/', function (req, res) {
 	var note = req.body
 	note.id = uuid.v4();
-	note.date = Date.now() / 1000;
+	note.date = Math.round(Date.now() / 1000);
 	fs.writeFile(config.data+'/'+note.id+'.json', JSON.stringify(note),function (err){
 		if(err) throw err;
 	});
 	res.status(201).send(JSON.stringify({id: note.id}));
 });
+
 
 api.delete('/:id', function (req, res){
 	var filename = config.data+"/"+req.params.id+".json";
