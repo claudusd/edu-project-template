@@ -5,15 +5,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import configure from './store';
 
+import List from './List';
+
 const store = configure();
 
 const history = syncHistoryWithStore(browserHistory, store);
-
-class Yolo extends Component {
-    render() {
-        return(<h1>Hello World !!</h1>);
-    }
-};
 
 class Swag extends Component {
     render() {
@@ -26,7 +22,7 @@ export default class App extends Component {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    <Route path="/" component={Yolo}>
+                    <Route path="/" component={List}>
                     </Route>
                     <Route path="/new" component={Swag}>
                     </Route>

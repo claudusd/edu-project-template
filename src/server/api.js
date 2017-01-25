@@ -59,15 +59,15 @@ router.delete('/:id', function(req, res){
 
 router.post('/', function(req, res){
 	content = {};
-	content["id"] = uuid.v4();
-	content["date"] = Date.now() / 1000;
-	content["title"] = req.body.title;
-	content["content"] = req.body.content;
+	content.id = uuid.v4();
+	content.date = Math.round(Date.now() / 1000);
+	content.title = req.body.title;
+	content.content = req.body.content;
 	fs.writeFile(config.data + '/' + content.id + '.json', JSON.stringify(content), (err) => {
 		if (err) throw err;
 		console.log('It\'s saved!');
 	}); 
-	res.status(201).send(content.id);
+	res.status(201).json({"id": content.id });
 });
 
 module.exports = router;

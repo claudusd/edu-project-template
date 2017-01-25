@@ -11,3 +11,5 @@ app.listen(config.port, function () {
 });
 
 app.use('/notes', api);
+
+app.use('/', express.static(config.static));
