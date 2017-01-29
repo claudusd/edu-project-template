@@ -8,7 +8,10 @@ export default class List extends Component {
   	}
 
   	componentWillMount() {
-  		console.log(Client);
+	    let marks = Client.findAll();
+	    console.log(marks);
+  		//this.setState({marks : Client.findAll()});
+        //console.log(this.state);
   	}
 
     render() {
@@ -16,9 +19,9 @@ export default class List extends Component {
         	<div>
         		<h3>Notes</h3>
 		      	<ul>
-			        {this.props.marks.map(item => (
-			          <li key={item.id}>{item.text}</li>
-			        ))}
+			        {/*{this.state.marks.map(item => (*/}
+			          {/*<li key={item.id}>{item.text}</li>*/}
+			        {/*))}*/}
 		      	</ul>
 	      </div>
         );

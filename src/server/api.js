@@ -9,8 +9,8 @@ router.get('/', function(req, res){
 	
 	const finder = new FindFiles({
 		rootFolder : config.data,
-		filterFunction: function(){
-			return true;
+		filterFunction: function(path, stat){
+			return path.endsWith(".json");
 		}
 	});
 

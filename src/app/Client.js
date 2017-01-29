@@ -1,26 +1,32 @@
-class Client{
+class Client {
 
-	findAll() {
-		fetch('localhost:3000/notes')
-		.then(function (response) {
-			if(response.status == 204) {
-				return 'No notes';
-			}
-			return response.json();
-		});
-	}
+    static findAll() {
+        return fetch('/notes')
+            .then(function (response) {
+                if (response.status == 204) {
+                    return 'No notes';
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                return data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
-	findOneById(id) {
-		
-	}
+    static findOneById(id) {
 
-	delete(id) {
-		
-	}
+    }
 
-	create(title, content) {
-		
-	}
+    static delete(id) {
+
+    }
+
+    static create(title, content) {
+
+    }
 }
 
 export default Client;
