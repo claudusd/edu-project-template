@@ -6,6 +6,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import configure from './store';
 
 import List from './List';
+import Note from './Note';
+import Create from './Create';
 
 const store = configure();
 
@@ -24,7 +26,9 @@ export default class App extends Component {
                 <Router history={history}>
                     <Route path="/" component={List}>
                     </Route>
-                    <Route path="/new" component={Swag}>
+                    <Route path="/new" component={Create}>
+                    </Route>
+                    <Route path="/:id" component={Note}>
                     </Route>
                 </Router>
             </Provider>
