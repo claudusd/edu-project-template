@@ -1,16 +1,11 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
+import client from './client';
 
 class CreateNote extends Component {
 	
-	fetch(){
-	
-	
-	}
-	
-	
 	render(){
 		return (
-			<div> </div>
+			<div>Create note</div>
 		)
 	}
    
