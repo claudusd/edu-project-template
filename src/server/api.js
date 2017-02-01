@@ -25,7 +25,6 @@ api.route('/')
 		    //console.log(strPath + " - " + stat.mtime);
 			files.push(strPath);
 		}).on('complete', function() {
-			console.log(files.length);
 			if(files.length == 0) return res.status(204).send('No notes found');
 			
 			for(file of files) {

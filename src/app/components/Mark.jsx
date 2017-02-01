@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { browserHistory } from 'react-router';
+
 import clientInstance from './Client';
 
 export default class Mark extends Component {
@@ -10,12 +12,25 @@ export default class Mark extends Component {
         };
         
         this.modifyAfterFind = this.modifyAfterFind.bind(this);
+        this.infoAfterDelete = this.infoAfterDelete.bind(this);
     }
 
     modifyAfterFind(mark) {
         this.setState({
             mark: mark
         })
+    }
+
+
+    infoAfterDelete(info) {
+        /*this.setState({
+            info: info
+        })*/
+        browserHistory.push('/');
+    }
+
+    deleteMark(id){
+        clientInstance.remove(id,this.infoAfterDelete)
     }
 
     componentDidMount() {
@@ -35,6 +50,7 @@ export default class Mark extends Component {
                         <div>Date: {this.state.mark.date}</div>
                         <div>Title: {this.state.mark.title}</div>
                         <div>Content:{this.state.mark.content}</div>
+                        <button onClick={() => this.deleteMark(this.state.mark.id)}>Supprimer la note</button>
                     </div>
             </div>
         );

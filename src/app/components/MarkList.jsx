@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link, browserHistory } from 'react-router';
 
 import clientInstance from './Client';
 
@@ -10,12 +11,25 @@ export default class MarkList extends Component {
         };
 
         this.modifyAfterFindAll = this.modifyAfterFindAll.bind(this);
+        this.infoAfterDelete = this.infoAfterDelete.bind(this);
+        //this.deleteMark = this.deleteMark.bind(this);
     }
 
     modifyAfterFindAll(marks) {
         this.setState({
             marks: marks
         })
+    }
+
+    infoAfterDelete(info) {
+        //browserHistory.push('/');
+        /*this.setState({
+            info: info
+        })*/
+    }
+
+    deleteMark(id){
+        clientInstance.remove(id,this.infoAfterDelete)
     }
 
     componentDidMount() {
@@ -36,7 +50,8 @@ export default class MarkList extends Component {
                         <div>Date: {mark.date}</div>
                         <div>Title: {mark.title}</div>
                         <div>Content:{mark.content}</div>
-                        <a href={"/" + mark.id}>Consulter cette note</a>
+                        <Link to={`/${mark.id}`}>Consulter cette note</Link>
+                        <button onClick={() => this.deleteMark(mark.id)}>Supprimer la note</button>
                     </div>
                 ))}
             </div>
