@@ -32,7 +32,7 @@ export default class App extends Component {
                     </Route>
                     <Route path="/new" component={New}>
                     </Route>
-                    <Route path="/one" component={OneNote}>
+                    <Route path="/one/:id" component={OneNote}>
                     </Route>
                 </Router>
             </Provider>
