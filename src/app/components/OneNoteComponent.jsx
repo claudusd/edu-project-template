@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Client from './Client';
+import { browserHistory } from 'react-router';
 export default class OneNote extends Component {
 
-	componentWillMount() {
-        var c = new Client;
+	componentDidMount() {
+      	var c = new Client;
         c.find(this.props.params.id, this.setNote);
         
     };
@@ -13,12 +14,20 @@ export default class OneNote extends Component {
         this.state = { note : [] };
 
         this.setNote = this.setNote.bind(this);
-
-        
+        this.redirectAfter = this.redirectAfter.bind(this);   
     }
 
     setNote(json){
         this.setState({note : json})
+    }
+
+    redirectAfter(){
+        browserHistory.push('/');
+    }
+
+    removeNote(id){
+    	var cl = new Client;
+    	cl.delete(id,this.redirectAfter);
     }
 
 
@@ -36,16 +45,8 @@ export default class OneNote extends Component {
 	                <h4>Contenu : {note.contenu} </h4>
 	                <h4>Date : {note.date}</h4>
 	                <h4>
-	                  	<button>
-	                  		<a to={'/'+note.id}>
-	                        	Delete
-	                    	</a>  
-	                    </button>
-                	</h4>
-                     
-                    
-            
-           
+	                 <button onClick={()=> this.removeNote(note.id)}>Supprimer</button>
+                	</h4>                                         
         </div>
         );
     }

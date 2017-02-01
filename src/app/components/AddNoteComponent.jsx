@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Client from './Client';
+import { browserHistory } from 'react-router';
 export default class AddNote extends Component {
 
 
@@ -8,15 +9,16 @@ export default class AddNote extends Component {
      constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.redirectAfter = this.redirectAfter.bind(this);
+    }
+
+    redirectAfter(){
+        browserHistory.push('/');
     }
 
     handleSubmit(e) {
         e.preventDefault(); // prevent native submitting behavior
         var c = new Client;
-
-
-
-        
         //console.log(React.findDOMNode(this.refs.nom).value);
         //console.log(React.findDOMNode(this.refs.contenu).value);
         console.log("SUBMIT");
@@ -26,10 +28,8 @@ export default class AddNote extends Component {
         formData[field] = this.refs[field].value;
         }
 
-        c.create(formData);
+        c.create(formData,this.redirectAfter);
         console.log('-->',formData);
-
-     
 
     }
 

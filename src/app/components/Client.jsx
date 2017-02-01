@@ -25,7 +25,7 @@ export default class Client{
 
 	}
 
-	create(object){
+	create(object,callback){
 
 		fetch('/notes', {
 			method: 'POST',
@@ -36,12 +36,23 @@ export default class Client{
 			body: JSON.stringify({ 
 				nom: object.nom,
 				contenu: object.contenu, 
-			}) 
+			})
 		})
+		.then(function(response){
+			return response.json();
+
+		}).then(callback) 
 	}
 
-	delete(id){
-
+	delete(id, callback){
+		console.log(id);
+		fetch('/notes/'+id,{
+			method: 'DELETE',
+			headers: { 
+				'Accept': 'application/json',
+			},
+		})
+		.then(callback)
 	}
 }
 

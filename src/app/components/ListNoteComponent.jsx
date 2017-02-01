@@ -4,7 +4,7 @@ import Client from './Client';
 export default class ListNote extends Component {
 
 
-    componentWillMount() {
+    componentDidMount() {
         var c = new Client;
         c.findAll(this.setNotes);
         
