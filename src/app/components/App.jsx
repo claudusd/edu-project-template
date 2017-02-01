@@ -5,7 +5,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import configure from './store';
 
-import MarkList from './MarkList'
+import MarkList from './MarkList';
+import Mark from './Mark';
 
 const store = configure();
 
@@ -31,6 +32,8 @@ export default class App extends Component {
                     <Route path="/" component={MarkList}>
                     </Route>
                     <Route path="/new" component={Swag}>
+                    </Route>
+                    <Route path="/:id" component={Mark}>
                     </Route>
                 </Router>
             </Provider>

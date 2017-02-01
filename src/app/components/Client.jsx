@@ -1,9 +1,34 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Client extends Component {
-    findAll() {
-        return fetch('/notes')
-            .then(response => response.json())
-            .then((notes) => { this.setState({ notes }); });
+class Client {
+    findAll(callback) {
+        fetch('/notes')
+            .then((response) => response.json())
+            .then((responseJson) => callback(responseJson))
+            .catch((error) => {
+                console.error(error);
+            }
+        );
+    }
+
+    find(id, callback) {
+        fetch('/notes/' + id)
+            .then((response) => response.json())
+            .then((responseJson) => callback(responseJson))
+            .catch((error) => {
+                console.error(error);
+            }
+        );
+    }
+
+    create() {
+
+    }
+
+    remove() {
+
     }
 };
+
+const clientInstance = new Client();
+export default clientInstance;
