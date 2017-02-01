@@ -64,11 +64,7 @@ api.get('/:id', function(req, res){
 
 api.post('/', function(req, res){
 	
-		var note = { 
-			"nom" : "une note",
-			"contenu" : "un contenu"
-			};
-		
+		var note = req.body;
 		note.date = Math.floor(Date.now()/1000);
 		note.id = uuid.v4();
 		
