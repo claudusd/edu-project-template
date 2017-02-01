@@ -6,6 +6,8 @@ export default class Note extends Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {mark: {}};
+	    this.getMark = this.getMark.bind(this);
+	    this.deleted = this.deleted.bind(this);
   	}
 
   	getMark(data){
@@ -15,27 +17,34 @@ export default class Note extends Component {
   	componentDidMount() {
   		const client = new Client();
       let id = this.props.params.id;
-	    let mark = client.findOneById(id, this.getMark.bind(this));
+	    client.findOneById(id, this.getMark);
   	}
 
     deleteNote(id){
       const client = new Client();
-      client.remove(id);
+      client.remove(id, this.deleted);
+    }
+
+    deleted(message){
+        this.setState({deleted: message});
     }
 
     render() {
-    	console.log(this.state.mark);
-      let mark = this.state.mark;
-        return(
-          <div>
-          	<div>
-          		<h2>{mark.title}</h2>
-              <p>{mark.content}</p>
-              <small>Edited at {mark.date}</small>
-  	       </div>
-              <button onClick={() => this.deleteNote(mark.id)}>Supprimer</button>
-              <Link to='/'>Retour à la liste</Link>
-        </div>
-        );
+        if(undefined === this.state.deleted) {
+            let mark = this.state.mark;
+            return (
+                <div>
+                    <div>
+                        <h2>{mark.title}</h2>
+                        <p>{mark.content}</p>
+                        <small>Edited at {mark.date}</small>
+                    </div>
+                    <button onClick={() => this.deleteNote(mark.id)}>Supprimer</button>
+                    <Link to='/'>Retour à la liste</Link>
+                </div>
+            );
+        } else {
+            return(<div><h2>{this.state.deleted}</h2><Link to='/'>Retour à la liste</Link></div>)
+        }
     }
 };

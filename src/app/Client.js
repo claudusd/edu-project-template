@@ -4,7 +4,7 @@ class Client {
         fetch('/notes')
             .then(function (response) {
                 if (response.status == 204) {
-                    return 'No notes';
+                    return 'Pas de notes';
                 }
                 return response.json();
             })
@@ -20,7 +20,7 @@ class Client {
         fetch('/notes/' + id)
             .then(function (response) {
                 if (response.status == 404) {
-                    return 'Not found';
+                    return "Cette note n'existe pas";
                 }
                 return response.json();
             })
@@ -32,8 +32,7 @@ class Client {
             });
     }
 
-    remove(id) {
-        console.log(id);
+    remove(id, callback) {
         fetch('/notes/' + id, {
              headers: {
               'Accept': 'application/json'
@@ -41,15 +40,18 @@ class Client {
             method: "DELETE"
         })
         .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            console.log(data);
+            if(response.status == 204) {
+                callback("Note supprimée");
+            } else if(response.status == 404){
+                callback("Cette note n'existe pas");
+            }
+            else {
+                callback("Problème de suppression");
+            }
         });
     }
 
-    create(note) {
-        console.log(JSON.stringify(note));
+    create(note, callback) {
         fetch('/notes', {
              headers: {
               'Accept': 'application/json',
@@ -62,7 +64,7 @@ class Client {
             return response.json();
         })
         .then(function(data){
-            console.log(data);
+            callback(data.id);
         });
     }
 }
