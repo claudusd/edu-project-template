@@ -16,13 +16,12 @@ api.route('/')
 		var files = [];
 		var finder = new findFiles({
 		    rootFolder : config.data,
-		    filterFunction: function () {
-                    return true;
+		    filterFunction: function (path, stat) {
+                    return path.endsWith('.json');
             }
 		});
 
 		finder.on('match', function(strPath, stat) {
-		    //console.log(strPath + " - " + stat.mtime);
 			files.push(strPath);
 		}).on('complete', function() {
 			if(files.length == 0) return res.status(204).send('No notes found');
