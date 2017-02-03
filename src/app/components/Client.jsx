@@ -35,9 +35,14 @@ export default class Client{
 .then(function(res){ console.log(res) })
 	}
 
-	remove(id){
-
+	remove(id, callback){
+		console.log(id);
+		fetch('/notes/'+id,{
+			method: 'DELETE',
+			headers:{
+				'Accept' : 'application/json',
+			},
+		})
+		.then(callback)
 	}
-
-
 };
