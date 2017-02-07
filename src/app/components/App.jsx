@@ -17,9 +17,9 @@ export default class App extends Component {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    <Route path="/list" component={ListNotes} ></Route>
-					<Route path="/create" component={CreateNote} ></Route>
-					<Route path="/note/:id" component={Note} ></Route>
+                    <Route path="/" component={ListNotes} ></Route>
+		    <Route path="/create" component={CreateNote} ></Route>
+		    <Route path="/note/:id" component={Note} ></Route>
                 </Router>
             </Provider>
         );
