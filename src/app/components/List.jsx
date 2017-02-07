@@ -25,16 +25,18 @@ export default class List extends Component {
             marks = <p>{this.state.marks}</p>;
         } else {
             marks = this.state.marks.map(function (mark) {
-                return <li className="list-group-item" key={mark.id}><Link to={'/' + mark.id}>{mark.title}</Link></li>;
+                return <li className="list-group-item" key={mark.id}><Link style={{fontVariant: "small-caps"}} to={'/' + mark.id}>{mark.title}</Link></li>;
             });
         }
         return (
             <div className="row-fluid">
                 <h3>Notes</h3>
-                <ul className="list-group col-xs-4">
+                <ul className="list-group">
                     {marks}
                 </ul>
-                <Link className="btn btn-default" to="/new">Ajouter une note</Link>
+                <div className="col-xs-4">
+                    <Link className="btn btn-info text-center" to="/new">Ajouter une note</Link>
+                </div>
             </div>
         );
     }

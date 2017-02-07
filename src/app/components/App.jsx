@@ -13,11 +13,6 @@ const store = configure();
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-class Swag extends Component {
-    render() {
-        return(<h1>Swag</h1>);
-    }
-};
 
 export default class App extends Component {
     render() {

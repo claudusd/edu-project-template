@@ -1,6 +1,6 @@
 class Client {
 
-    findAll(callback) {
+    findAll(getMarks) {
         fetch('/notes')
             .then(function (response) {
                 if (response.status == 204) {
@@ -9,23 +9,23 @@ class Client {
                 return response.json();
             })
             .then(function(data){
-                callback(data);
+                getMarks(data);
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
 
-    findOneById(id, callback) {
+    findOneById(id, getMark) {
         fetch('/notes/' + id)
             .then(function (response) {
                 if (response.status == 404) {
-                    return "Cette note n'existe pas";
+                    getMark("Cette note n'existe pas");
                 }
                 return response.json();
             })
             .then(function(data){
-                callback(data);
+                getMark(data);
             })
             .catch(function (error) {
                 console.log(error);

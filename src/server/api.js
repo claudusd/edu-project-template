@@ -14,21 +14,21 @@ router.get('/', function(req, res){
 		}
 	});
 
-	const files = [];
-	
+	const filesPath = [];
 	finder.on("match", function(path, stat){
-		files.push(path);
-	}).on("complete", function() {
-		if(files.length == 0){
+		filesPath.push(path);
+	})
+	.on("complete", function() {
+		if(filesPath.length == 0){
 			return res.sendStatus(204);
 		}
 		
-		json_array = [];
-		for (file of files) {
-			json_array.push(JSON.parse(fs.readFileSync(file)));
+		notes = [];
+		for (file of filesPath) {
+			notes.push(JSON.parse(fs.readFileSync(file)));
 		}
 		
-		res.status(200).send(json_array);
+		res.status(200).send(notes);
 	});
 
 	finder.startSearch();
@@ -58,16 +58,17 @@ router.delete('/:id', function(req, res){
 });
 
 router.post('/', function(req, res){
-	content = {};
-	content.id = uuid.v4();
-	content.date = Math.round(Date.now() / 1000);
-	content.title = req.body.title;
-	content.content = req.body.content;
-	fs.writeFile(config.data + '/' + content.id + '.json', JSON.stringify(content), (err) => {
+	note = {
+		id: uuid.v4(),
+		date: Math.floor(Date.now() / 1000),
+		title: req.body.title,
+		content: req.body.content
+	};
+	fs.writeFile(config.data + '/' + note.id + '.json', JSON.stringify(note), (err) => {
 		if (err) throw err;
-		console.log('It\'s saved!');
+		console.log('Your note is saved!');
 	}); 
-	res.status(201).json({"id": content.id });
+	res.status(201).json({"id": note.id });
 });
 
 module.exports = router;

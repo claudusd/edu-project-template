@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import Client from '../Client';
 
 export default class Note extends Component {
@@ -26,25 +26,29 @@ export default class Note extends Component {
     }
 
     deleted(message){
-        this.setState({deleted: message});
+        browserHistory.push('/');
     }
 
     render() {
-        if(undefined === this.state.deleted) {
-            let mark = this.state.mark;
-            return (
-                <div>
-                    <div>
+          let mark = this.state.mark;
+          let date = new Date(mark.date * 1000).toLocaleString();
+
+          return (
+              <div className="row-fluid">
+                  <div className="col-xs-8">
+                    <div className="row">
                         <h2>{mark.title}</h2>
                         <p>{mark.content}</p>
-                        <small>Edited at {mark.date}</small>
+                        <small>Editée le {date}</small>
                     </div>
-                    <button onClick={() => this.deleteNote(mark.id)}>Supprimer</button>
                     <Link to='/'>Retour à la liste</Link>
+                    <br/>
+                    <br/>
+                  <div className="row">
+                    <button className="btn btn-danger" onClick={() => this.deleteNote(mark.id)}>Supprimer</button>
+                  </div>
                 </div>
-            );
-        } else {
-            return(<div><h2>{this.state.deleted}</h2><Link to='/'>Retour à la liste</Link></div>)
-        }
+              </div>
+          );
     }
 };
