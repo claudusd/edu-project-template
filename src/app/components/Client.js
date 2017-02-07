@@ -36,22 +36,28 @@ class Client{
 	  
   }
   
-  static suprNote(callback,id){
-	  fetch("/notes/supr/" + id).then(function(response){
+  static suprNote(id){
+	  fetch("/notes/" + id,
+	  {method:'DELETE', 
+	   headers: {
+			'Accept': 'application/json'
+	   }
+	  }).then(function(response){
+		  
 		  if(response.status == 404){
 			  return "Fichier non existant";
 		  }
+		  
 		  else if(response.status == 204){
 			return "Supression réussie !";
 		  }	
+		  
 		  return "Problème de supression";
-	  }).then(function(data){
-		  callback(data)
 	  });
   }
   
   static createNote(callback, note){
-	  fetch("/notes/create", 
+	  fetch("/notes", 
 			{ method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

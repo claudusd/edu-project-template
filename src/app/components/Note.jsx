@@ -22,11 +22,17 @@ export default class Note extends Component {
     render() {
 		
 		let note = this.state.note;
+		
+				
+		let lienSupr = "/" + note.id
+		
 		return (
-			<div>
+			<div className="row">
 				<h1>{note.title}</h1>
 				<h3>{note.content}</h3>
+				<button onClick={this.lienSupr} className="btn btn-danger">Supprimer une note </button>
 			</div>
+			
 		);		
 	}		
 };

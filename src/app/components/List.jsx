@@ -22,14 +22,15 @@ export default class List extends Component {
     render() {
 		
 		let notes = this.state.notes;
-		return (<div>
+
+		return (<div className="row">
 					<h1> Liste des notes </h1>
-					<ul>
+					<ul className="list-group">
 					{notes.map(function (note, i) {
-						return <li key={i}><Link to={'/' + note.id}>{note.title}</Link></li>
+						return <li className="list-group-item" key={i}><Link  to={'/' + note.id}>{note.title}</Link></li>
 					})}
 					</ul>
-					<a href="createNote">Ajouter une note </a>
+					<a href="createNote" className="btn btn-info">Ajouter une note </a>
 				</div>);
 	}
 };

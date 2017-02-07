@@ -57,7 +57,7 @@ api.get('/:id', function(request,response){
 	});	
 });
 
-api.delete('/suprNote/:id', function(request,response){
+api.delete('/:id', function(request,response){
 	
 	var path = config.data + "/" + request.params.id + ".json";
 	
@@ -72,7 +72,7 @@ api.delete('/suprNote/:id', function(request,response){
 });
 
 
-api.post("/create", function(request, response){
+api.post("/", function(request, response){
 	var json = request.body;
 	json.id = uuid.v4();
 	json.date = Math.floor(Date.now() / 1000);

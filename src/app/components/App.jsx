@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import List from './List';
 import Note from './Note';
-import SuprNote from './SuprNote';
 import CreateNote from './CreateNote';
 
 import configure from './store';
