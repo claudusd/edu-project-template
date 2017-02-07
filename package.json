@@ -37,6 +37,7 @@
     "express": "^4.14.0",
     "fs-extra": "^2.0.0",
     "node-find-files": "0.0.4",
-    "node-uuid": "^1.4.7"
+    "node-uuid": "^1.4.7",
+    "react-timestamp": "^3.1.0"
   }
 }
