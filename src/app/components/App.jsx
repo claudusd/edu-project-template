@@ -21,7 +21,7 @@ export default class App extends Component {
                 <Router history={history}>
                     <Route path="/" component={ListNote}></Route>
                     <Route path="/addNote" component={AddNote}></Route>
-                    <Route path="/oneNote/:id" component={OneNote}></Route>
+                    <Route path="/:id" component={OneNote}></Route>
                 </Router>
             </Provider>
         );

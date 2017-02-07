@@ -48,7 +48,7 @@ export default class ListNote extends Component {
                
                 {notes.map(function(note, i) {
 
-                  return  <Link className="link-to-note" to={'/oneNote/'+note.id}>
+                  return  <Link className="link-to-note" to={'/'+note.id}>
                                 <div key={i} className="note listnote col-md-6 col-md-push-3">
                     
                                     {note.nom}
