@@ -17,7 +17,6 @@ class List extends Component {
 	
 	supprimer(event) {
 		console.log(event.target.value);
-		alert("supression :");
 		let idDel = event.target.value;
 		var callback = function() {
 			let lesNotes = [];

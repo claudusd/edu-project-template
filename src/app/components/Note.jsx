@@ -17,7 +17,6 @@ class Note extends Component {
 	
 	supprimer(event) {
 		event.preventDefault();
-		alert("supression :");
 		this.c.remove(this.props.params.splat, function() {
 			browserHistory.push('/');
 		});
