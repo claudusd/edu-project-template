@@ -53,13 +53,12 @@ router.get('/:idNote', function (req, res) {
 	});
 })
 
-// curl --data "title=title" localhost:3000/notes
+// curl --data  "{ 'title': 'title' }" localhost:3000/notes
 
 router.post('/', function (req, res) {
 	var note = req.body;
-
-	note.title = req.body.title;
-	note.content = req.body.content;
+	/*note.title = req.body.title;
+	note.content = req.body.content;*/
 	note.id = uuid.v4();
 	note.date = Math.floor(Date.now() / 1000);
 console.log(note);
