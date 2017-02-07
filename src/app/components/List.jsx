@@ -26,12 +26,12 @@ export default class List extends Component {
                     <h2 className="text-center">Notes!</h2>
                     <hr className="colorgraph"/>
                     <div className="row">
-                        <ul className="list-unstyled">
+                        <ul className="list-unstyled opa">
                             {this.state.notes.map(function (note) {
                                             return (
                                                 <div key={note.id} className="note">
                                                     <li>
-                                                            <Link className="option blackpropre" to={'/one/' + note.id} >
+                                                            <Link className="option blackpropre" to={'/' + note.id} >
                                                             <button className="btn bluecool icon-btn  col-md-12">
                                                             {note.title}
                                                             </button></Link>
