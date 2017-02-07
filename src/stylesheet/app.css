@@ -1,0 +1,91 @@
+body{
+
+ 	background-image: url("http://kaba35.com/wp-content/uploads/2015/11/Savin-NY-Website-Background-Web1.jpg");
+ 	background-repeat: no-repeat;
+ 	background-size: cover;
+ 	font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+}
+
+h1, h2{
+	text-align: center;
+}
+
+.form{
+	padding: 20px;
+	background:rgba(242, 240 ,243, 0.4);
+	    color: #000;
+    text-shadow: none;
+	box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+}
+
+.ma-note{
+	padding: 20px;
+	background-color: rgba(255, 255, 255, 0.4);
+    text-shadow: none;
+    text-align: center;
+	box-shadow: 0px 3px 5px 0px;
+}
+
+
+
+.form-control{
+	
+	border-radius: 0px;
+	
+}
+
+.form-control:focus{
+	border-style: solid;
+	border-width: 5px;
+	border-radius: 0px;
+	border-color: rgb(242, 240 ,243);
+}
+
+.btn-primary{
+	border-radius: 0px;
+	
+	border-style: solid;
+	border-width: 3px;
+
+}
+
+.listnote{
+	background-color: rgba(255, 255, 255, 0.4);
+	padding: 30px;
+	
+	box-shadow: 0px 3px 5px 0px;
+	margin: 15px;
+	text-align: center;
+	font-size: 24px;
+}
+.listnote:hover{
+	box-shadow: 0px 3px 5px 0px;
+	
+}
+
+.link-to-note{
+	color: black;
+	box-shadow: 0px 3px 5px;
+	text-decoration: none;
+	
+}
+
+
+.link-to-note:hover{
+	text-decoration: none;
+
+}
+
+
+.link-to-addNote{
+	font-size: 14px;
+	
+
+}
+
+.link-to-addNote:hover{
+	text-decoration: none;
+
+
+}
+

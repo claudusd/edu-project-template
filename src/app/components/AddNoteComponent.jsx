@@ -36,21 +36,26 @@ export default class AddNote extends Component {
     render(){
         return(
 
-         <div>
+        <div>
            <h1>Ajouter une nouvelle note</h1>
-           <form onSubmit={this.handleSubmit}  method="POST">
+           <div className="col-md-4 col-md-offset-4 form">
 
-                <div className="form-group">
-                    <label>Titre de la note : </label>
-                    <input ref="nom" type="text" className="form-control" name="nom"/>
-                </div>
-                <div className="form-group">
-                    <label>Contenu : </label>
-                    <input ref="contenu" type="text" className="form-control" name="contenu"/>
-                </div>
-                 <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+               <form onSubmit={this.handleSubmit}  method="POST" >
+
+                    <div className="form-group">
+                        <label>Titre de la note : </label>
+                        <input ref="nom" type="text" className="form-control" name="nom" required/>
+                    </div>
+                    <div className="form-group">
+                        <label>Contenu : </label>
+                        <input ref="contenu" type="text" className="form-control" name="contenu" required/>
+                    </div>
+                     <button type="submit" className="btn btn-primary">Submit</button>
+
+                </form>
+
             </div>
+        </div>
         );
     }
 };

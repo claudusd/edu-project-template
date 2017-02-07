@@ -32,22 +32,30 @@ export default class ListNote extends Component {
 
             <div>
 
-               <h1>Liste de toutes les notes</h1>
+                <h1>Liste de toutes les notes</h1>
+                <div className="row">
+                    <h2>
+                        <Link className="link-to-addNote" to={'/addNote'}>
+                            Ajouter une note
+                        </Link> 
+                    </h2>
+                </div>
+               
 
-               <Link to={'/addNote'}>
-                        Ajouter une nom
-                </Link> 
-                
+
 
                
                
                 {notes.map(function(note, i) {
-                  return  <div key={i} className="note">
-                    <Link to={'/oneNote/'+note.id}>
-                        {note.nom}
-                    </Link>  
+
+                  return  <Link className="link-to-note" to={'/oneNote/'+note.id}>
+                                <div key={i} className="note listnote col-md-6 col-md-push-3">
+                    
+                                    {note.nom}
                      
-                    </div>
+                     
+                                </div>
+                            </Link> 
 
                 })}
 
