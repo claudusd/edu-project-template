@@ -21,7 +21,7 @@ export default class Client{
   			});
 	}
 
-	create(titre, contenu){
+	create(titre, contenu, callback){
 		console.log(titre);
 		fetch("/notes",
 {
@@ -32,7 +32,7 @@ export default class Client{
     method: "POST",
     body: JSON.stringify({title: titre, contenu: contenu})
 })
-.then(function(res){ console.log(res) })
+.then(callback)
 	}
 
 	remove(id, callback){

@@ -7,6 +7,7 @@ import configure from './store';
 import List from './List';
 import New from './New';
 import OneNote from './OneNote';
+
 const store = configure();
 const history = syncHistoryWithStore(browserHistory, store);
 
