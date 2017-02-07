@@ -20,25 +20,21 @@ api.get('/', function(request, response){
 
 	finder.on("match", function(path, stat) {
    		files.push(path);
-		console.log("le fichier " + path + " a bien été ajouté"); 
 	});
 
 	finder.on("complete", function() {
+		var json_array = []
 		if(files.length == 0){
 			return response.sendStatus(204);
 		}else {			
 			for(var file of files){
-				console.log(file);
-				
-				jsonFile = fs.readFileSync(file)
-				
-				console.log(JSON.parse(jsonFile));						
+				jsonFile = JSON.parse(fs.readFileSync(file));
+				json_array.push(jsonFile);
+				console.log(json_array);						
 			}	
-			console.log("les fichiers ont bien étés ajoutés"); 
-			return response.status(200).json({id: jsonFile.id});
+			return response.status(200).json(json_array);
 		}  				
 	});
-
 	finder.startSearch();
 	
 });
@@ -61,7 +57,7 @@ api.get('/:id', function(request,response){
 	});	
 });
 
-api.delete('/:id', function(request,response){
+api.delete('/suprNote/:id', function(request,response){
 	
 	var path = config.data + "/" + request.params.id + ".json";
 	
@@ -76,7 +72,7 @@ api.delete('/:id', function(request,response){
 });
 
 
-api.post("/", function(request, response){
+api.post("/create", function(request, response){
 	var json = request.body;
 	json.id = uuid.v4();
 	json.date = Math.floor(Date.now() / 1000);
@@ -87,7 +83,6 @@ api.post("/", function(request, response){
 		return response.status(201).json({id: json.id});
 		console.log('It\'s saved!');
 	});
-	
 });
 
 module.exports = api;
