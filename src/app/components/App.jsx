@@ -5,30 +5,25 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import configure from './store';
 
+import List from './List';
+import Note from './Note';
+import Create from './Create';
+
 const store = configure();
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-class Yolo extends Component {
-    render() {
-        return(<h1>Hello World !!</h1>);
-    }
-};
-
-class Swag extends Component {
-    render() {
-        return(<h1>Swag</h1>);
-    }
-};
 
 export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    <Route path="/" component={Yolo}>
+                    <Route path="/" component={List}>
                     </Route>
-                    <Route path="/new" component={Swag}>
+                    <Route path="/new" component={Create}>
+                    </Route>
+                    <Route path="/:id" component={Note}>
                     </Route>
                 </Router>
             </Provider>
