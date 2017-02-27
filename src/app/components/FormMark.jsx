@@ -28,7 +28,7 @@ export default class FormMark extends Component {
 
         this.setState({
           [name]: value
-        });
+      });
     }
 
 
@@ -38,17 +38,24 @@ export default class FormMark extends Component {
 
     render() {
         return (
-          <form onSubmit={this.handleSubmit}>
+            <div className="container left-align">
+            <h3 className="">Add a note</h3>
+            <p>Here you can add a Note to your list.</p>
+
+            <form onSubmit={this.handleSubmit}>   
             <label>
-              Title:
-              <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+            Title:
+            <input type="text" name="title" value={this.state.title} onChange={this.handleChange} required/>
             </label>
             <label>
-              Content:
-              <input type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+            Content:
+            <input type="text" name="content" value={this.state.content} onChange={this.handleChange} required/>
             </label>
-            <input type="submit" value="Submit" />
-          </form>
-        );
+            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i className="material-icons right">send</i>
+            </button>
+            </form>
+            </div>
+            );
     }
 };

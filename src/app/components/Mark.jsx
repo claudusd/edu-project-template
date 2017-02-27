@@ -45,14 +45,21 @@ export default class Mark extends Component {
             return <div>Aucune donnée</div>;
         }
         return (
-            <div>
-                    <div>
-                        <div>Date: {this.state.mark.date}</div>
-                        <div>Title: {this.state.mark.title}</div>
-                        <div>Content:{this.state.mark.content}</div>
-                        <button onClick={() => this.deleteMark(this.state.mark.id)}>Supprimer la note</button>
-                    </div>
+            <div className="row">
+            <div className="card">
+            <div className="card-content">
+            <span className="card-title">{this.state.mark.title}</span>
+            <div>Date: {this.state.mark.date}</div>
+            <div>Valeur:{this.state.mark.content}</div>
+
             </div>
-        );
+            <div className="card-action">
+            <button className="waves-effect waves-light btn" onClick={() => this.deleteMark(this.state.mark.id)}>Supprimer la note</button>
+
+            </div>
+            </div>
+
+            </div>
+            );
     }
 };
