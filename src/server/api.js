@@ -25,9 +25,12 @@ api.route('/')
 			files.push(strPath);
 		}).on('complete', function() {
 			if(files.length == 0) return res.status(204).send('No notes found');
-			
+
 			for(file of files) {
-				allContent.push(JSON.parse(fs.readFileSync(file)))
+				let current = JSON.parse(fs.readFileSync(file))
+				let date = new Date(current.date * 1000)
+				current.date = date.getHours() + ':' + ("0" + date.getMinutes()).substr(-2) + ':' + ("0" + date.getSeconds()).substr(-2)
+				allContent.push(current)
 			};
 
 			return res.status(200).send(allContent);
@@ -56,7 +59,10 @@ api.route('/:id')
 
 	fs.exists(file, (exists) => {
 		if (exists) {
-			return res.status(200).sendFile(file);
+			let current = JSON.parse(fs.readFileSync(file))
+			let date = new Date(current.date * 1000)
+			current.date = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+			return res.status(200).send(current);
 		} else {
 			return res.status(404).send('Note not found');
 		}

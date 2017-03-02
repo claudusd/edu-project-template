@@ -4,9 +4,14 @@ const config = require('./config.js');
 
 const app = express();
 
-app.use("/", express.static(config.static));
 app.use('/notes', api);
+app.use(express.static(config.static));
+app.use(function(req,res,next){
+	res.sendFile('index.html', {
+		root:config.static
+	});
+});
 
 app.listen(config.port, function () {
- 	console.log('Example app listening on port ' + config.port + '!');
+ 	console.log('App listening on port ' + config.port + '!');
 });

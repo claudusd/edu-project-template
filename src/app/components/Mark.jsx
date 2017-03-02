@@ -8,9 +8,9 @@ export default class Mark extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mark: null,
+            mark: [],
         };
-        
+
         this.modifyAfterFind = this.modifyAfterFind.bind(this);
         this.infoAfterDelete = this.infoAfterDelete.bind(this);
     }
@@ -23,9 +23,6 @@ export default class Mark extends Component {
 
 
     infoAfterDelete(info) {
-        /*this.setState({
-            info: info
-        })*/
         browserHistory.push('/');
     }
 
@@ -38,10 +35,7 @@ export default class Mark extends Component {
     }
 
     render() {
-        if(!this.state.mark) {
-            return <div>Loading</div>;
-        }
-        if(!this.state.mark.length === 0) {
+        if(this.state.mark.length === 0) {
             return <div>Aucune donnée</div>;
         }
         return (
