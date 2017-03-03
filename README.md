@@ -1,3 +1,5 @@
+By Pierre Pic and Aurélien Pillevesse
+
 # Project
 
 ## Part 1 - api
