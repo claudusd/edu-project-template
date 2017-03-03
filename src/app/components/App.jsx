@@ -1,13 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { Router, Route, browserHistory, applyRouterMiddleware } from 'react-router';
+import { Router, Route, browserHistory, Link, applyRouterMiddleware } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
+
+import Form from './Form';
+
+import List from './List';
+
+import Note from './Note';
 
 import configure from './store';
 
 const store = configure();
 
+
 const history = syncHistoryWithStore(browserHistory, store);
+
+
 
 class Yolo extends Component {
     render() {
@@ -21,15 +30,16 @@ class Swag extends Component {
     }
 };
 
+
+
 export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    <Route path="/" component={Yolo}>
-                    </Route>
-                    <Route path="/new" component={Swag}>
-                    </Route>
+					<Route path="/new" component={Form}></Route>
+					<Route path="/" component={List}></Route>
+					<Route path="/*" component={Note}></Route>
                 </Router>
             </Provider>
         );
