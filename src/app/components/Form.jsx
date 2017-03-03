@@ -34,20 +34,24 @@ class Form extends Component {
 	}	
 
 	render(){		
-		return (
-			<form onSubmit={this.handleSubmit}>
-				<div>
-					<label htmlFor="title">Title : </label>
-					<input type="text" name="title" placeholder="A remplir" onChange={this.handleChangeTitle} />
+		return (<div className="row-fluid"><h2 className="text-center">Création d'une note</h2>
+			<form className="form-horizontal" onSubmit={this.handleSubmit}>
+				<div className="form-group">
+				<label className="col-sm-3 control-label" htmlFor="title">Title</label>
+				<div className="col-sm-6">
+					<input type="text" className="form-control" name="title" placeholder="A remplir" onChange={this.handleChangeTitle} />
+				</div></div>
+				<div className="form-group">
+				<label className="col-sm-3 control-label" htmlFor="content">Content</label>
+				<div className="col-sm-6">
+					<textarea name="content" className="form-control" placeholder="A remplir" onChange={this.handleChangeContent}></textarea></div>
 				</div>
-				<div>
-					<label htmlFor="content">Content : </label>
-					<textarea name="content" placeholder="A remplir" onChange={this.handleChangeContent}></textarea>
-				</div>
-				<div>
-					<input type="submit" value="Enregistrer la note" />
-				</div>
+				<div className="form-group">
+				<div className="col-sm-offset-3 col-sm-6" >
+					<input className="btn btn-primary" type="submit" value="Enregistrer la note" />
+				</div></div>
 			</form>
+		</div>
 		);
 	}
 };

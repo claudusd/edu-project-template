@@ -37,22 +37,36 @@ class List extends Component {
 		
 	var each = function(note) {
 				return(
+				<div className="container">				
+				<div className="row-fluid"><div className="col-sm-12">
+				<div className="panel panel-default"><div className="panel-body">
+				<div className="row-fluid">
 				<div key={note.id}>				
-				<h3>{note.title}</h3>
-				<p>{note.content}</p>
-				<Link to={'/'+note.id}>Un lien</Link>
-				<button value={note.id} onClick={this.supprimer}>Supprimer</button>
-				<hr/>
-				</div>);
+				<h3 className="col-sm-offset-2 col-sm-10">{note.title}</h3>
+				<p className="col-sm-offset-2 col-sm-10">{note.content}</p>
+				<Link className="col-sm-offset-2 col-sm-4 btn btn-primaty" to={'/'+note.id}>Consulter la note</Link>
+				<button className="col-sm-2 btn btn-danger" value={note.id} onClick={this.supprimer}>Supprimer</button>
+				
+				</div></div></div></div></div></div></div>);
 			};
 			each = each.bind(this);
 		return (<div>
-			{this.state.notes.map(each)}
+			<div className="jumbotron text-center">
+			<h1>Welcome to Note Manager</h1>
+			<Link className="btn btn-primaty" to={'/new'}>Cliquer ici pour ajouter une note !</Link>
 			</div>
+			<div className="row-fluid">
+			<div>{this.state.notes.map(each)}
+			</div></div></div>
 		);
 	}
 	else {
-		return(<div><p>Pas de notes</p></div>);
+		return(<div>
+			<div className="jumbotron text-center">
+			<h1>Welcome to Note Manager</h1>
+			<Link className="btn btn-primaty" to={'/new'}>Cliquer ici pour ajouter une note !</Link>
+			</div>
+	<div className="row-fluid"><h2 className="text-center">Pas de notes</h2></div></div>);
 	}
 	}
 };
