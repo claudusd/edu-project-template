@@ -10,6 +10,14 @@ class Note extends Component {
 		this.handleSubmitDelete = this.handleSubmitDelete.bind(this);
 	}
 
+	componentWillMount(){
+		//getting the element to display
+		var callback = function(data){this.setState({note:data})};
+		callback = callback.bind(this);
+		client.find(this.props.params.id,callback);
+
+	}
+
 
 
 	handleSubmitDelete(event) {
@@ -23,26 +31,22 @@ class Note extends Component {
 	}
 	render(){
 
-		//getting the element to display
-		var callback = function(data){this.setState({note:data})};
-		callback = callback.bind(this);
-		client.find(this.props.params.id,callback);
+		
 
 		//put it in a clear variable
 		var note= this.state.note;
 		return (
 			<div>
-				<h1 class="text-center">{note.title}</h1>
-				<p>{note.content}</p>				
-				<br/>
-				<Link to="/">Back</Link>
-				<br/>
-				<button type="button" onClick={this.handleSubmitDelete}>Delete</button>
+				<h1 className="text-center">{note.title}</h1>
+				<div className="col-sm-12 blue-background padding-15">
+					<button type="button" className="btn btn-danger col-sm-offset-8 col-sm-2" onClick={this.handleSubmitDelete}>Delete</button>
+					<p className="col-sm-8 col-sm-offset-2 paragraph text-justify padding-15">{note.content}</p>
+					<Link className="col-sm-2 col-sm-offset-2" to="/">Back</Link>
+				</div>
 			</div>
 		)
 	}
-   
+
 };
 
 export default Note;
-

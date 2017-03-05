@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Router, Route, browserHistory, applyRouterMiddleware } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-
 import configure from './store';
 import ListNotes from './ListNotes.jsx';
 import Note from './Note.jsx';
@@ -18,8 +17,8 @@ export default class App extends Component {
             <Provider store={store}>
                 <Router history={history}>
                     <Route path="/" component={ListNotes} ></Route>
-		    <Route path="/create" component={CreateNote} ></Route>
-		    <Route path="/note/:id" component={Note} ></Route>
+		                <Route path="/create" component={CreateNote} ></Route>
+		                <Route path="/note/:id" component={Note} ></Route>
                 </Router>
             </Provider>
         );
