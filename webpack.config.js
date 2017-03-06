@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const jQuery = require("jquery");
 
 const PATHS  = {
     app: path.join(__dirname, 'src/app'),
@@ -29,12 +31,21 @@ const common = {
                     cacheDirectory: true,
                     presets: ['react', 'es2015']
                 }
+
+            },
+
+            {
+              test:/\.css$/,
+              loader: ExtractTextPlugin.extract("style-loader", "css-loader")
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname)+'/index.ejs'
+        }),
+        new ExtractTextPlugin("[name].css",{
+        allChunks: true
         })
     ]
 }
@@ -73,4 +84,3 @@ if (process.env.NODE_ENV == 'production') {
         ]
     });
 }
-

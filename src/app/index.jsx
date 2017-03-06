@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import App from './components/App';
+import styles from 'style!../app.css';
 
 const appElement = document.getElementById('app');
 
 ReactDOM.render(
-    <AppContainer>    
+    <AppContainer>
         <App />
     </AppContainer>,
     appElement
+
+
 );
 
 if (module.hot) {

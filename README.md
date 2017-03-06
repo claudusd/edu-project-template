@@ -1,5 +1,7 @@
 # Project
-
+## Authors
+	Pinchon robin
+	Guy Florian
 ## Part 1 - api
 
 [API](doc/swagger)

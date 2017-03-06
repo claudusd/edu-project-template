@@ -1,0 +1,47 @@
+.listNote{
+	height:200px;
+	border: 1px solid white;
+	background-color:#337ab7;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+a{
+	color:white;
+	padding:15px;
+}
+
+h1,h1,h3{
+	padding-bottom:20px;
+}
+
+p, label{
+	color:white;
+}
+.listNote > a{
+	color:white;
+	padding:15px;
+	line-height:200px;
+}
+
+.paragraph{
+	word-wrap:break-word;
+	background-color:#337ab7;
+	color:white;
+
+}
+
+.blue-background{
+	background-color:#337ab7
+}
+
+.margin-15{
+	margin:15px;
+}
+.padding-15{
+	padding:15px;
+}
+
+.text-white{
+	color:white;
+}
